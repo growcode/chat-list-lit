@@ -22,7 +22,7 @@ const messages = ref([
   { content: 'What is the weather like today?', role: 'human', timestamp: '10:02 AM' },
 ])
 
-const onSubmit = (event: Event) => {
+const onSubmit = async (event: Event) => {
   event.preventDefault()
   
   const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
@@ -35,6 +35,10 @@ const onSubmit = (event: Event) => {
   messages.value.push({ content: message, role: 'human', timestamp });
   // @ts-ignore
   chatList.value!.requestUpdate();
+  // @ts-ignore
+  await chatList.value!.updateComplete;
+  // @ts-ignore
+  chatList.value!._updateScroll();
 }
 </script>
 
