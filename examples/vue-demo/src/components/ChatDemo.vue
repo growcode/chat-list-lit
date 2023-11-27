@@ -17,11 +17,11 @@ const onSubmit = (event: Event) => {
   const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
   
   // @ts-ignore
-  const input = event.target!.querySelector('input')
-  const message = input.value
-  input.value = ''
+  const input = event.target!.querySelector('input');
+  const message = input.value;
+  input.value = '';
   
-  messages.value.push({ content: message, role: 'human', timestamp })
+  messages.value.push({ content: message, role: 'human', timestamp });
   // @ts-ignore
   chatList.value!.requestUpdate();
 }

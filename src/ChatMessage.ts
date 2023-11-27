@@ -1,43 +1,43 @@
 import { LitElement, html, css } from 'lit';
-import {property} from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 
-export class ChatMessage extends LitElement {  
+export class ChatMessage extends LitElement {
   @property()
   rounded: boolean;
 
   @property()
   message: {
-    content: string
-    role: string
-    timestamp: Date
+    content: string;
+    role: string;
+    timestamp: Date;
   } | null;
 
-  static styles = css`    
-    div.message {
+  static styles = css`
+    li.message {
       position: relative;
       display: flex;
       flex-direction: row;
       padding: 12px 9px;
     }
-    div.message.bot {
+    li.message.bot {
       justify-content: flex-start;
     }
-    div.message.human {
+    li.message.human {
       flex-direction: row-reverse;
     }
-    
-    div.message div.message-avatar {
+
+    li.message div.message-avatar {
       width: 50px;
       height: 50px;
       border-radius: 50%;
       margin: 0 20px 0 0;
       background: #aaa;
     }
-    div.message.human div.message-avatar {
+    li.message.human div.message-avatar {
       margin: 0 0 0 20px;
     }
 
-    div.message div.message-copy {
+    li.message div.message-copy {
       position: relative;
       display: flex;
       width: fit-content;
@@ -51,35 +51,35 @@ export class ChatMessage extends LitElement {
       font-weight: 400;
       line-height: 1.2;
     }
-    div.message.human div.message-copy {
+    li.message.human div.message-copy {
       align-items: flex-end;
       background: #0084ff;
       color: #fff;
     }
-    div.message div.message-timestamp {
+    li.message div.message-timestamp {
       display: block;
       font-size: 10px;
     }
-    div.message div.chat-arrow {
+    li.message div.chat-arrow {
       position: absolute;
       bottom: -8px;
       right: 20px;
     }
 
-    div.message.rounded {
+    li.message.rounded {
       border-radius: 20px;
     }
-    div.message.rounded div.message-copy {
+    li.message.rounded div.message-copy {
       border-radius: 13px;
     }
-    div.message.rounded.human div.message-copy {
+    li.message.rounded.human div.message-copy {
       border-radius: 20px 0 20px 20px;
     }
-    div.message.rounded.bot div.message-copy {
+    li.message.rounded.bot div.message-copy {
       border-radius: 0 20px 20px 20px;
     }
   `;
-  
+
   constructor() {
     super();
     this.message = null;
@@ -88,16 +88,17 @@ export class ChatMessage extends LitElement {
 
   render() {
     return html`
-      <div class="message ${this.message?.role} ${this.rounded ? 'rounded' : ''}">
+      <li
+        class="message ${this.message?.role} ${this.rounded ? 'rounded' : ''}"
+      >
         <div class="message-avatar"></div>
         <div class="message-copy">
           <div class="message-content">${this.message?.content}</div>
           <div class="message-timestamp">${this.message?.timestamp}</div>
         </div>
-      </div>
+      </li>
     `;
   }
 }
 
 customElements.define('chat-message', ChatMessage);
-

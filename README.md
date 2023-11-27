@@ -5,7 +5,7 @@ A simple chat list component that accepts an array of message objects and handle
 ## Installation
 
 ```bash
-npm i chat-list
+npm i
 ```
 
 ## Usage
