@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import '../../../../dist/src/chat-list.js';
 
 const chatList = ref(null);
+const isRounded = ref(true);
 
 const messages = ref([
   { content: 'Hello! How are you?', role: 'bot', timestamp: '10:00 AM' },
@@ -29,11 +30,36 @@ const onSubmit = (event: Event) => {
 
 <template>
   <main>
-    <chat-list .messages="messages" ref="chatList"></chat-list>
+    <chat-list ref="chatList" .messages="messages" .rounded="isRounded"></chat-list>
 
     <form class="chat-input" v-on:submit="onSubmit">
-      <input type="text" placeholder="Type a message..." />
-      <button>Send</button>
+      <p>
+        <input type="text" placeholder="Type a message..." />
+        <button>Send</button>
+      </p>
+
+      <p>
+        <input type="checkbox" v-model="isRounded" />
+        <label>Rounded corners?</label>
+      </p>
     </form>
   </main>
 </template>
+
+<style scoped>
+form p {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  margin-top: 1rem;
+}
+
+form p:first-child input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+}
+</style>
