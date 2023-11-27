@@ -1,6 +1,11 @@
 # \<chat-list>
 
-A simple chat list component that accepts an array of message objects and handle display and scroll behavior. 
+A simple chat list component that accepts an array of message objects and handle display and scroll behavior. It's expected that chat input and message handling logic would be done in a parent or sibling component.
+
+There are two apps:
+
+- `./demo` (viewable via npm start) uses the component directly in a basic html file.
+- `./examples/vue-app` contains a simple Vue example with the component. See the readme in that directory for usage.
 
 ## Installation
 
