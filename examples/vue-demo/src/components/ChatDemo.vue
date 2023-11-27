@@ -4,6 +4,16 @@ import '../../../../dist/src/chat-list.js';
 
 const chatList = ref(null);
 const isRounded = ref(true);
+const bubbleColors = ref(['#eee', '#0084ff']);
+
+const colorOptions = ref([
+  { value: ['#eee', '#0084ff'], label: 'Default' },
+  { value: ['#eee', '#888'], label: 'Gray' },
+  { value: ['#eee', '#ff0000'], label: 'Red' },
+  { value: ['#eee', '#00cc00'], label: 'Green' },
+  { value: ['#eee', '#ff00ff'], label: 'Magenta' },
+  { value: ['#eee', '#000000'], label: 'Black' },
+]);
 
 const messages = ref([
   { content: 'Hello! How are you?', role: 'bot', timestamp: '10:00 AM' },
@@ -30,7 +40,12 @@ const onSubmit = (event: Event) => {
 
 <template>
   <main>
-    <chat-list ref="chatList" .messages="messages" .rounded="isRounded"></chat-list>
+    <chat-list
+      ref="chatList"
+      .messages="messages"
+      .rounded="isRounded"
+      .bubbleColors="bubbleColors"
+    ></chat-list>
 
     <form class="chat-input" v-on:submit="onSubmit">
       <p>
@@ -39,8 +54,23 @@ const onSubmit = (event: Event) => {
       </p>
 
       <p>
-        <input type="checkbox" v-model="isRounded" />
-        <label>Rounded corners?</label>
+        <label>
+          <input type="checkbox" v-model="isRounded" />
+          Rounded corners?
+        </label>
+      </p>
+      
+      <p>
+        <label>
+          Colors:
+
+          <select v-model="bubbleColors">
+            <option
+              v-for="option in colorOptions" :value="option.value"
+              v-bind:key="option.label"
+            >{{ option.label }}</option> 
+          </select>
+        </label>
       </p>
     </form>
   </main>

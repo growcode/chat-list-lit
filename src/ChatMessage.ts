@@ -3,6 +3,9 @@ import { property } from 'lit/decorators.js';
 
 export class ChatMessage extends LitElement {
   @property()
+  colors: string[];
+
+  @property()
   rounded: boolean;
 
   @property()
@@ -84,15 +87,19 @@ export class ChatMessage extends LitElement {
     super();
     this.message = null;
     this.rounded = true;
+    this.colors = [];
   }
 
   render() {
+    const color = this.message?.role === 'human' ? this.colors[1] : this.colors[0];
+    const style: string = `background-color: ${color}`;
+
     return html`
       <li
         class="message ${this.message?.role} ${this.rounded ? 'rounded' : ''}"
       >
         <div class="message-avatar"></div>
-        <div class="message-copy">
+        <div class="message-copy" style="${style}">
           <div class="message-content">${this.message?.content}</div>
           <div class="message-timestamp">${this.message?.timestamp}</div>
         </div>

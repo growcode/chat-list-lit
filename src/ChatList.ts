@@ -3,6 +3,9 @@ import { property } from 'lit/decorators.js';
 import './ChatMessage'; // eslint-disable-line
 
 export class ChatList extends LitElement {
+  @property()
+  bubbleColors: string[];
+
   @property({ type: Boolean })
   rounded: boolean;
 
@@ -12,6 +15,7 @@ export class ChatList extends LitElement {
     role: string;
     timestamp: Date;
   }>;
+  
 
   static styles = css`
     .messages-wrap {
@@ -56,8 +60,9 @@ export class ChatList extends LitElement {
 
   constructor() {
     super();
-    this.messages = [];
+    this.bubbleColors = ['#eee', '#0084ff'];
     this.rounded = true;
+    this.messages = [];
   }
 
   updated() {
@@ -81,6 +86,7 @@ export class ChatList extends LitElement {
               html` <chat-message
                 .rounded=${this.rounded}
                 .message=${message}
+                .colors=${this.bubbleColors}
               ></chat-message>`
           )}
         </ul>
