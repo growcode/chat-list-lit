@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo"></div>
+  <form id="form">
+    <input id="message" type="text" placeholder="Type your message here" />
+    <button type="submit">Send</button>
+  </form>
+
+  <script type="module">
+    import { html, render } from 'lit';
+    import '../dist/src/chat-list.js';
+
+    const chatMessages = [
+        { content: 'Hello! How are you?', role: 'bot', timestamp: '10:00 AM' },
+        { content: 'I am fine, thanks! How about you?', role: 'human', timestamp: '10:01 AM' },
+        { content: 'Good. How can I help you?', role: 'bot', timestamp: '10:01 AM' },
+        { content: 'What is the weather like today?', role: 'human', timestamp: '10:02 AM' },
+    ];
+
+    render(
+      html`
+        <chat-list .messages=${chatMessages}></chat-list>
+      `,
+      document.querySelector('#demo')
+    );
+  </script>
+
+  <script type="module">
+    const form = document.getElementById('form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const message = document.getElementById('message').value;
+        const chatListComponent = document.querySelector('chat-list');
+        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+        
+        chatListComponent.messages = [...chatListComponent.messages, { content: message, role: 'human', timestamp }];
+        
+        document.getElementById('message').value = '';
+    });
+  </script>
+</body>
+</html>
